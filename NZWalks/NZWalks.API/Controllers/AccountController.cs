@@ -8,9 +8,10 @@ using NZWalks.API.Models.DTO;
 
 namespace NZWalks.API.Controllers
 {
+    [ApiController]
+    [Route("Account")]
     [AllowAnonymous]
-    [ApiVersion("1.0")]
-    public class AccountController : CustomControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -36,11 +37,11 @@ namespace NZWalks.API.Controllers
             // Create user
             ApplicationUser user = new ApplicationUser()
             {
-                Email= registerDTO.Email,
+                Email = registerDTO.Email,
                 PhoneNumber = registerDTO.Phone,
                 UserName = registerDTO.Email,
-                PersonName= registerDTO.PersonName,
-            }
+                PersonName = registerDTO.PersonName,
+            };
             IdentityResult result = await _userManager.CreateAsync(user, registerDTO.Password);
             if (result.Succeeded)
             {
@@ -67,38 +68,6 @@ namespace NZWalks.API.Controllers
             {
                 return Ok(false);
             }
-        }
-
-        // GET: api/<AccountController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AccountController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<AccountController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<AccountController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AccountController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
