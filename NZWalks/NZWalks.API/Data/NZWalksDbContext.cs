@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using NZWalks.API.Identity;
 using NZWalks.API.Models.Domain;
 
 namespace NZWalks.API.Data
 {
-    public class NZWalksDbContext: DbContext
+    public class NZWalksDbContext: IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         public NZWalksDbContext(DbContextOptions<NZWalksDbContext> options): base(options)
         {
